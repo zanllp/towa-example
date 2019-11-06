@@ -6,6 +6,19 @@ const { store } = Document;
     doc.title = 'hello world';
     doc.content = '23333';
     await store.push(doc);
+
+    const { id } = doc;
     const docs = await store.all();
-    docs.forEach(x => x && console.info(x));
+    docs.forEach(x => console.info(x!.id));
+
+    await store.findOneOrFail(id).then(async x => {
+        x.title = 'emmmm';
+        await store.save(x);
+    });
+    console.info('title:' + await store.getOrFail(id).then(x => x.title));
+    await store.getInstance(id).then(inst => inst.setItems({ content: 'towa' }));
+    console.info(`content:${await store.getOrFail(id).then(x => x.content)}`);
+
+    await store.del(id);
+    console.info(await store.get(id) === null);
 })();

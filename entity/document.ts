@@ -6,6 +6,7 @@ export interface IDocumentRedis {
     authorId: number;
     content: string;
     title: string;
+    clickCount: number;
     createdDate: string;
     updatedDate: string;
 }
@@ -21,6 +22,7 @@ export class Document {
         convert: o => {
             o.id = Number(o.id);
             o.authorId = Number(o.authorId);
+            o.clickCount = Number(o.clickCount);
             return o;
         },
     });
