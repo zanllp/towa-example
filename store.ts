@@ -1,5 +1,5 @@
 import { createConnection } from 'towa';
-export const { storeControl, getBlendDB } = createConnection({
+export const { storeControl, getBlendDB, storeControlORM } = createConnection({
     typeorm: {
         type: 'mysql',
         host: 'localhost',
